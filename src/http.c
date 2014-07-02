@@ -89,7 +89,7 @@ http_callback_404(httpd *webserver, request *r)
 			"<p>We apologize, but it seems that the internet connection that powers this hotspot is temporarily unavailable.</p>"
 			"<p>If at all possible, please notify the owners of this hotspot that the internet connection is out of service.</p>"
 			"<p>The maintainers of this network are aware of this disruption.  We hope that this situation will be resolved soon.</p>"
-			"<p>In a while please <a href='%s'>click here</a> to try your request again.</p>", tmp_url);
+			"<p>In a while please <a href='%s'>click here</a> to try your request again.</p><p style='display:none;'>中文测试</p>", tmp_url);
 
                 send_http_page(r, "Uh oh! Internet access unavailable!", buf);
 		free(buf);
@@ -101,7 +101,7 @@ http_callback_404(httpd *webserver, request *r)
 		safe_asprintf(&buf, 
 			"<p>We apologize, but it seems that we are currently unable to re-direct you to the login screen.</p>"
 			"<p>The maintainers of this network are aware of this disruption.  We hope that this situation will be resolved soon.</p>"
-			"<p>In a couple of minutes please <a href='%s'>click here</a> to try your request again.</p>", tmp_url);
+			"<p>In a couple of minutes please <a href='%s'>click here</a> to try your request again.</p><p style='display:none;'>中文测试</p>", tmp_url);
 
                 send_http_page(r, "Uh oh! Login screen unavailable!", buf);
 		free(buf);
@@ -114,21 +114,23 @@ http_callback_404(httpd *webserver, request *r)
 		if (!(mac = arp_get(r->clientAddr))) {
 			/* We could not get their MAC address */
 			debug(LOG_INFO, "Failed to retrieve MAC address for ip %s, so not putting in the login request", r->clientAddr);
-			safe_asprintf(&urlFragment, "%sgw_address=%s&gw_port=%d&gw_id=%s&url=%s",
+			safe_asprintf(&urlFragment, "%sgw_address=%s&gw_port=%d&gw_id=%s&url=%s&clientip=%s",
 				auth_server->authserv_login_script_path_fragment,
 				config->gw_address,
 				config->gw_port, 
 				config->gw_id,
-				url);
+				url,
+				r->clientAddr);
 		} else {			
 			debug(LOG_INFO, "Got client MAC address for ip %s: %s", r->clientAddr, mac);
-			safe_asprintf(&urlFragment, "%sgw_address=%s&gw_port=%d&gw_id=%s&mac=%s&url=%s",
+			safe_asprintf(&urlFragment, "%sgw_address=%s&gw_port=%d&gw_id=%s&mac=%s&url=%s&clientip=%s",
 				auth_server->authserv_login_script_path_fragment,
 				config->gw_address,
 				config->gw_port, 
 				config->gw_id,
 				mac,
-				url);
+				url,
+				r->clientAddr);
 		}
 
 		debug(LOG_INFO, "Captured %s requesting [%s] and re-directing them to login page", r->clientAddr, url);
