@@ -148,7 +148,7 @@ authenticate_client(request *r)
 	case AUTH_ERROR:
 		/* Error talking to central server */
 		debug(LOG_ERR, "Got %d from central server authenticating token %s from %s at %s", auth_response, client->token, client->ip, client->mac);
-		send_http_page(r, "Error!", "Error: We did not get a valid answer from the central server");
+		send_http_page(r, "错误!", "错误: 核心服务器没有响应");
 		break;
 
 	case AUTH_DENIED:
@@ -185,9 +185,10 @@ authenticate_client(request *r)
 		client->fw_connection_state = FW_MARK_KNOWN;
 		fw_allow(client->ip, client->mac, FW_MARK_KNOWN);
         served_this_session++;
-		safe_asprintf(&urlFragment, "%sgw_id=%s",
+		safe_asprintf(&urlFragment, "%sgw_id=%s&mac=%s",
 			auth_server->authserv_portal_script_path_fragment,
-			config->gw_id
+			config->gw_id,
+			client->mac
 		);
 		http_send_redirect_to_auth(r, urlFragment, "Redirect to portal");
 		free(urlFragment);
