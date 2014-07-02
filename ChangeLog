@@ -1,4 +1,6 @@
 # $Id$
+2014-07-03
+        * add clientip in the redirect url
 2014-05-13
         * libhttpd crash on invalid HTTP headers (second part of the patch) by Benoit Grégoire
 2013-08-21

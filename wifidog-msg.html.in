@@ -2,6 +2,7 @@
 <head>
 <title>$title</title>
 <meta HTTP-EQUIV='Pragma' CONTENT='no-cache'>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <style>
 body {
@@ -77,19 +78,18 @@ a:visited {
 <div id="menu">
 
 
-    <h2>Info</h2>
+    <h2>信息</h2>
     <ul>
-    <li>Version: @WIFIDOG_VERSION@
+    <li>WifiAS Wifi认证系统
 
-    <li>Node ID: $nodeID
+    <li>认证节点: $nodeID
     </ul>
     <br>
 
-    <h2>Menu</h2>
+    <h2>连接</h2>
     <ul>
-    <li><a href='/wifidog/status'>WiFiDog Status</a>
-    <li><a href='/wifidog/about'>About WiFiDog</a>
-    <li><a href='http://www.wifidog.org'>WiFiDog's homepage</a>
+    <li><a href='/wifidog/status'>认证系统状态查看</a>
+    <li><a href='http://www.wifias.com' target="_blank">WiFiAS's 主页</a>
     </ul>
 </div>
 
@@ -97,8 +97,11 @@ a:visited {
 <h2>$message</h2>
 </div>
 
-<div id="copyright">
-Copyright (C) 2004-2005.  This software is released under the GNU GPL license.
+<div id="copyright" style=""><br />
+<center>
+Copyright (C) 2004-2005.  This software is released under the GNU GPL license.<br />
+技术支持：深圳市一视科技有限公司 电话：0755-33559011
+</center>
 </div>
 
 
