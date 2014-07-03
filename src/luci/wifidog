@@ -1,0 +1,19 @@
+
+config wifidog 'wifidog'
+	option gateway_interface 'br-lan'
+	option gateway_httpport '80'
+	option gateway_connmax '200'
+	option wifidog_enable '0' #是否启用wifidog
+	option enable '0'
+	option gateway_id 'demoNode'
+	option gateway_eninterface 'eth0.2'
+	option gateway_hostname 'auth.wifias.com'
+	option gateway_path '/demoToken/'
+	option HTTPDMaxConn '25'
+	option client_timeout '180'
+	option check_interval '5'
+
+config wifidog_deamo 'wifidog_deamo'
+	option enable '1'
+
+
