@@ -3,7 +3,58 @@
 START=50
 
 start() {
-	/usr/bin/wifidog-init start
+	rm -f /etc/wifidog.conf
+	gateway_id=$(uci get wifidog.@wifidog[0].gateway_id)
+	gateway_interface=$(uci get wifidog.@wifidog[0].gateway_interface) 
+	gateway_eninterface=$(uci get wifidog.@wifidog[0].gateway_eninterface)
+	gateway_hostname=$(uci get wifidog.@wifidog[0].gateway_hostname) 
+	gateway_httpport=$(uci get wifidog.@wifidog[0].gateway_httpport) 
+	gateway_path=$(uci get wifidog.@wifidog[0].gateway_path) 
+	gateway_connmax=$(uci get wifidog.@wifidog[0].gateway_connmax) 
+	client_timeout=$(uci get wifidog.@wifidog[0].client_timeout) 
+	check_interval=$(uci get wifidog.@wifidog[0].check_interval) 
+	
+	enable=$(uci get wifidog.@wifidog[0].wifidog_enable) 
+	
+	gateway_hostname_ip_tmp=`nslookup $gateway_hostname | tail -n 1`
+	[ "$?" == 0 ] || exit 1
+	gateway_hostname_ip=`echo ${gateway_hostname_ip_tmp#*:}`
+		
+	echo "GatewayID $gateway_id
+ExternalInterface $gateway_eninterface
+GatewayInterface $gateway_interface
+AuthServer {
+Hostname $gateway_hostname_ip
+HTTPPort $gateway_httpport
+Path $gateway_path
+MsgScriptPathFragment   gw_message/?
+}
+HTTPDMaxConn $gateway_connmax
+CheckInterval $check_interval
+ClientTimeout $client_timeout
+FirewallRuleSet global {
+FirewallRule allow to $gateway_hostname_ip
+}
+FirewallRuleSet validating-users {
+FirewallRule allow to 0.0.0.0/0
+}
+FirewallRuleSet known-users {
+FirewallRule allow to 0.0.0.0/0
+}
+FirewallRuleSet unknown-users {
+FirewallRule allow udp port 53
+FirewallRule allow tcp port 53
+FirewallRule allow udp port 67
+FirewallRule allow tcp port 67
+FirewallRule block udp port 8000
+}
+	" >> /etc/wifidog.conf
+	
+	if [ "$enable" == "1" ] ; then
+		/usr/bin/wifidog-init start
+	else
+		/usr/bin/wifidog-init stop
+	fi
 }
 
 stop() {

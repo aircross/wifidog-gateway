@@ -51,6 +51,8 @@ $(IPKG_WIFIDOG):
 	install -m0755 ./files/$(PKG_NAME).init $(IDIR_WIFIDOG)/etc/init.d/S65wifidog
 	install -m0644 ./files/wifidog.conf $(IDIR_WIFIDOG)/etc/
 	install -m0644 $(PKG_BUILD_DIR)/wifidog-msg.html $(IDIR_WIFIDOG)/etc/
+	install -m0644 $(PKG_BUILD_DIR)/src/luci/controller/wifidog.lua $(IDIR_WIFIDOG)/usr/lib/lua/luci/controller/
+	install -m0644 $(PKG_BUILD_DIR)/src/luci/model/cbi/wifidog.lua $(IDIR_WIFIDOG)/usr/lib/lua/luci/model/cbi/
 	install -m0755 -d $(IDIR_WIFIDOG)/usr/bin
 	install -m0755 -d $(IDIR_WIFIDOG)/usr/lib
 	install -m0755 $(PKG_BUILD_DIR)/scripts/init.d/wifidog $(IDIR_WIFIDOG)/usr/bin/wifidog-init
