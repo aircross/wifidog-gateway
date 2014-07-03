@@ -55,6 +55,7 @@ define Package/wifidog/install
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/wifidog-msg.html $(1)/etc/
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/src/luci/controller/wifidog.lua $(1)/usr/lib/lua/luci/controller/
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/src/luci/model/cbi/wifidog.lua $(1)/usr/lib/lua/luci/model/cbi/
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/src/luci/wifidog $(1)/etc/config/
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/$(PKG_NAME).init $(1)/etc/init.d/wifidog
 endef
