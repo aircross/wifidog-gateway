@@ -16,6 +16,9 @@ start() {
 	gateway_connmax=$(uci get wifidog.@wifidog[0].gateway_connmax) 
 	client_timeout=$(uci get wifidog.@wifidog[0].client_timeout) 
 	check_interval=$(uci get wifidog.@wifidog[0].check_interval) 
+	check_interval=$(uci get wifidog.@wifidog[0].check_interval) 
+	TrustedMACList=$(uci get wifidog.@wifidog[0].TrustedMACList) 
+	TrustedHostList=$(uci get wifidog.@wifidog[0].TrustedHostList) 
 	
 	enable=$(uci get wifidog.@wifidog[0].wifidog_enable) 
 	
@@ -35,6 +38,8 @@ MsgScriptPathFragment   gw_message/?
 HTTPDMaxConn $gateway_connmax
 CheckInterval $check_interval
 ClientTimeout $client_timeout
+TrustedMACList $TrustedMACList
+TrustedHostList $TrustedHostList
 FirewallRuleSet global {
 FirewallRule allow to $gateway_hostname_ip
 }

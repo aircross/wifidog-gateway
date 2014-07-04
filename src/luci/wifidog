@@ -12,6 +12,8 @@ config wifidog 'wifidog'
 	option HTTPDMaxConn '25'
 	option client_timeout '180'
 	option check_interval '5'
+	option TrustedMACList '00:22:11:A4:BC:88,00:22:11:A4:BC:89'
+	option TrustedHostList 'www.eachsea.com,eachsea.com,wifias.com,auth.wifias.com,user.wifias.com,member.wifias.com'
 
 config wifidog_deamo 'wifidog_deamo'
 	option enable '1'

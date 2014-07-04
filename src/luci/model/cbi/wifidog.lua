@@ -34,6 +34,8 @@ if fs.access("/usr/bin/wifidog") then
 	gateway_connmax = s:option(Value,"HTTPDMaxConn",translate("max user"))
 	client_timeout = s:option(Value,"client_timeout",translate("client timeout"))
 	check_interval = s:option(Value,"check_interval",translate("check interval"))
+	TrustedHostList = s:option(Value,"TrustedHostList",translate("Trusted Host List"),translate("etc:www.wifias.com,user.wifias.com"))
+	TrustedMACList = s:option(Value,"TrustedMACList",translate("Trusted MAC List"),translate("etc:00:22:11:A4:BC:88,00:22:11:A4:BC:89"))
 
 	
 	--deamo_enable = s:option(Flag, "enable", translate("Dog"),translate("reboot wifidog"))
