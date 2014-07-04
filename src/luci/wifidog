@@ -3,7 +3,7 @@ config wifidog 'wifidog'
 	option gateway_interface 'br-lan'
 	option gateway_httpport '80'
 	option gateway_connmax '200'
-	option wifidog_enable '0' #是否启用wifidog
+	option wifidog_enable '1' #是否启用wifidog
 	option enable '0'
 	option gateway_id 'demoNode'
 	option gateway_eninterface 'eth0.2'

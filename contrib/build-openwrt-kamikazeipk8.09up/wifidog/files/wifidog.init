@@ -30,7 +30,7 @@ start() {
 ExternalInterface $gateway_eninterface
 GatewayInterface $gateway_interface
 AuthServer {
-Hostname $gateway_hostname_ip
+Hostname $gateway_hostname
 HTTPPort $gateway_httpport
 Path $gateway_path
 MsgScriptPathFragment   gw_message/?

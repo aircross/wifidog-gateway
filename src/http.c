@@ -85,39 +85,39 @@ http_callback_404(httpd *webserver, request *r)
 	if (!is_online()) {
 		/* The internet connection is down at the moment  - apologize and do not redirect anywhere */
 		char * buf;
-		/*
 		safe_asprintf(&buf, 
 			"<p>We apologize, but it seems that the internet connection that powers this hotspot is temporarily unavailable.</p>"
 			"<p>If at all possible, please notify the owners of this hotspot that the internet connection is out of service.</p>"
 			"<p>The maintainers of this network are aware of this disruption.  We hope that this situation will be resolved soon.</p>"
 			"<p>In a while please <a href='%s'>click here</a> to try your request again.</p><p style='display:none;'>中文测试</p>", tmp_url);
-			*/
+		/*
 		safe_asprintf(&buf, 
 			"<p>很抱歉, 您所连接的认证网关暂时无法连接到互联网.</p>"
 			"<p>如果一直无法连接,并显示此画面, 请告知认证网关提供者检查认证网关的互联网连接状态.</p>"
 			"<p>维护人员如果知道这个故障.  希望可以尽快解决此问题.</p>"
 			"<p>稍后请<a href='%s'>点击这里</a>尝试重新连接.</p>", tmp_url);
+			*/
 
-                /*send_http_page(r, "Uh oh! Internet access unavailable!", buf);*/
-                send_http_page(r, "很抱歉! 认证网关无法连接待互联网!", buf);
+                send_http_page(r, "Uh oh! Internet access unavailable!", buf);
+                /*send_http_page(r, "很抱歉! 认证网关无法连接待互联网!", buf);*/
 		free(buf);
 		debug(LOG_INFO, "Sent %s an apology since I am not online - no point sending them to auth server", r->clientAddr);
 	}
 	else if (!is_auth_online()) {
 		/* The auth server is down at the moment - apologize and do not redirect anywhere */
-		char * buf;
-		/*safe_asprintf(&buf, 
+		char * buf;safe_asprintf(&buf, 
 			"<p>We apologize, but it seems that we are currently unable to re-direct you to the login screen.</p>"
 			"<p>The maintainers of this network are aware of this disruption.  We hope that this situation will be resolved soon.</p>"
-			"<p>In a couple of minutes please <a href='%s'>click here</a> to try your request again.</p><p style='display:none;'>中文测试</p>", tmp_url);
-			*/
+			"<p>In a couple of minutes please <a href='%s'>click here</a> to try your request again.</p>", tmp_url);
+		/*
 		safe_asprintf(&buf, 
 			"<p>很抱歉, 暂时无法跳转到登陆页面.</p>"
 			"<p>维护人员如果知道这个故障.  希望可以尽快解决此问题.</p>"
 			"<p>稍后请<a href='%s'>点击这里</a>尝试重新连接.</p>", tmp_url);
+			*/
 
-                /*send_http_page(r, "Uh oh! Login screen unavailable!", buf);*/
-                send_http_page(r, "很抱歉! 登陆页面存在问题!", buf);
+                send_http_page(r, "Uh oh! Login screen unavailable!", buf);
+                /*send_http_page(r, "很抱歉! 登陆页面存在问题!", buf);*/
 		free(buf);
 		debug(LOG_INFO, "Sent %s an apology since auth server not online - no point sending them to auth server", r->clientAddr);
 	}
@@ -234,7 +234,7 @@ void http_send_redirect(request *r, const char *url, const char *text)
 	httpdAddHeader(r, header);
 	free(response);
 	free(header);
-	safe_asprintf(&message, "请<a href='%s'>点击这里</a>.", url);
+	safe_asprintf(&message, "Please<a href='%s'>Click here</a>.", url);
 	send_http_page(r, text ? text : "Redirection to message", message);
 	free(message);
 }
