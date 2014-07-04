@@ -6,11 +6,20 @@ The WiFi Guard Dog project is a complete and embeddable captive portal
 solution for wireless community groups or individuals who wish to open a
 free HotSpot while still preventing abuse of their Internet connection.
 
-The project's homepage is:
+The original project's homepage is:
 	http://dev.wifidog.org/
 
-Mailing list interface:
-	http://listes.ilesansfil.org/cgi-bin/mailman/listinfo/wifidog
+The WifiAS's homepage is http://wifias.com/
 
 The project's software is released under the GPL license and is copyright it's respective owners.
+
+When you compile it in openwrt,you need to add the code below in the ./feeds/packages/net/wifidog/Makefile after:
+$(INSTALL_DATA) $(PKG_BUILD_DIR)/wifidog-msg.html $(1)/etc/
+
+
+$(INSTALL_DATA) $(PKG_BUILD_DIR)/src/luci/controller/wifidog.lua $(1)/usr/lib/lua/luci/controller/
+$(INSTALL_DATA) $(PKG_BUILD_DIR)/src/luci/model/cbi/wifidog.lua $(1)/usr/lib/lua/luci/model/cbi/
+$(INSTALL_DATA) $(PKG_BUILD_DIR)/src/luci/wifidog $(1)/etc/config/
+$(INSTALL_DATA) $(PKG_BUILD_DIR)/wifidog.conf.default $(1)/etc/
+
 
