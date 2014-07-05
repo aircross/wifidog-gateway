@@ -211,8 +211,10 @@ int _connect_auth_server(int level) {
 	int num_servers = 0;
 	char * hostname = NULL;
 	char * popular_servers[] = {
-		  "www.google.com",
-		  "www.yahoo.com",
+		  "www.baidu.com",
+		  "www.taobao.com",
+		  "www.qq.com",
+		  "www.weibo.com",
 		  NULL
 	};
 	char ** popularserver;
