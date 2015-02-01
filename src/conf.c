@@ -271,7 +271,7 @@ parse_auth_server(FILE *file, const char *filename, int *linenum)
 		/* trim all blanks at the end of the line */
 		/* for (p2 = p2? p2: &line[MAX_BUF - 1]; isblank(p2) && p2 > p1; p2--) {*/
 		/* fixed a isblank() test */
-		for (p2 = (p2 != NULL? p2: &line[MAX_BUF - 1]); isblank(*p2) && p2 > p1; p2--) {
+		for (p2 = (p2 != NULL? p2 - 1: &line[MAX_BUF - 2]);isblank(*p2) && p2 > p1; p2--)
 			*p2 = '\0';
 		}
 
